@@ -18,7 +18,6 @@ class DeepSeekVKApp {
     }
 
     bindEvents() {
-        // Отправка сообщения
         this.sendButton.addEventListener('click', () => this.sendMessage());
         this.userInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
@@ -26,14 +25,9 @@ class DeepSeekVKApp {
                 this.sendMessage();
             }
         });
-
-        // Автоматическое изменение высоты textarea
         this.userInput.addEventListener('input', this.autoResizeTextarea.bind(this));
-
-        // VK Menu
         this.vkMenuBtn.addEventListener('click', () => this.toggleVKMenu());
         
-        // Быстрые действия
         document.querySelectorAll('.quick-action').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const prompt = e.currentTarget.dataset.prompt;
@@ -43,7 +37,6 @@ class DeepSeekVKApp {
             });
         });
 
-        // Пункты меню
         document.querySelectorAll('.menu-item').forEach(item => {
             item.addEventListener('click', (e) => {
                 const action = e.currentTarget.dataset.action;
@@ -51,7 +44,6 @@ class DeepSeekVKApp {
             });
         });
 
-        // Закрытие меню по клику вне его
         document.addEventListener('click', (e) => {
             if (!this.vkMenu.contains(e.target) && e.target !== this.vkMenuBtn) {
                 this.vkMenu.classList.remove('active');
@@ -77,35 +69,26 @@ class DeepSeekVKApp {
         this.userInput.style.height = Math.min(this.userInput.scrollHeight, 100) + 'px';
     }
 
-        async sendMessage() {
+    async sendMessage() {
         const message = this.userInput.value.trim();
         if (!message) return;
 
-        // Очищаем поле ввода
         this.userInput.value = '';
         this.autoResizeTextarea();
         this.userInput.style.borderColor = '#e7e8ec';
 
-        // Убираем welcome сообщение при первом сообщении
         const welcomeMessage = document.querySelector('.welcome-message');
         if (welcomeMessage) {
             welcomeMessage.style.display = 'none';
         }
 
-        // Добавляем сообщение пользователя
         this.addMessage(message, 'user');
-
-        // Показываем индикатор набора
         this.showTypingIndicator();
-
-        // Блокируем кнопку отправки
         this.sendButton.disabled = true;
 
-      
         const apiKey = 'sk-8e3893442b634bfeb972b89103eb5f71';
 
         try {
-            // Отправляем запрос к DeepSeek API
             const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
                 method: 'POST',
                 headers: {
@@ -116,40 +99,9 @@ class DeepSeekVKApp {
                     model: 'deepseek-chat',
                     messages: [
                         {
-    role: 'system',
-    content: 'Ты — ИИ-напарник D&R Fit. Твоя задача — помогать с тренировками, поддерживать психологически и адаптироваться под пользователя. Работаешь в сообществе VK и в мобильном приложении.
-
-**ЖЁСТКИЕ ПРАВИЛА:**
-
-1. НИКОГДА не давай тренировку сразу. Сначала собери ВСЕ вводные по одному вопросу за раз:
-   - Пол (мальчик/девочка) — для обращений
-   - Возраст
-   - Боли, травмы, ограничения (спина, колени, плечи и т.д.)
-   - Место тренировки (дом или зал)
-   - Снаряжение (коврик, гантели, резина, тренажёры, свободные веса)
-   - Настроение сегодня (😊🔥😫😔)
-   - Сколько минут есть
-   - Цель (размяться / подвижность / сила / энергия / похудеть / подготовка к событию)
-
-2. Только после получения ВСЕХ ответов предложи 2-3 простых упражнения с учётом пола, возраста, болей, места, снаряжения, настроения, времени и цели.
-
-3. Если пользователь выбирал цель «подготовка к событию» (лыжи, марафон, восхождение) или «реабилитация» (после травмы, операции) — учитывай это в упражнениях.
-
-4. Запрещено: давать длинные списки, тайминги, подходы, повторения. Только 2-3 упражнения коротко.
-
-5. Запрещена токсичная мотивация. Не стыдить, не давить, не сравнивать. Вместо «ты должен» — «ты можешь», «давай попробуем».
-
-6. Если пользователь ленится или пропустил тренировку — не ругать. Сказать: «Это нормально. Давай 5 минут лёгкой разминки?»
-
-7. Если пользователь спрашивает про еду — дать общие советы, но добавить: «Я не диетолог, при серьёзных вопросах к врачу».
-
-8. Если пользователь жалуется на боль или сильный стресс — посоветовать обратиться к специалисту и не давать упражнений.
-
-9. Всегда добавляй в конце напоминание: «Слушай тело. При острой боли — остановись».
-
-10. Отвечай коротко, тепло, с эмодзи. Будь как друг, который разбирается в спорте.'
-},
-                        // Отправляем историю последних 10 сообщений для контекста
+                            role: 'system',
+                            content: 'Ты — ИИ-напарник D&R Fit. Твоя задача — помогать с тренировками, поддерживать психологически и адаптироваться под пользователя. Работаешь в сообществе VK и в мобильном приложении.\n\n**ЖЁСТКИЕ ПРАВИЛА:**\n\n1. НИКОГДА не давай тренировку сразу. Сначала собери ВСЕ вводные по одному вопросу за раз:\n   - Пол (мальчик/девочка) — для обращений\n   - Возраст\n   - Боли, травмы, ограничения (спина, колени, плечи и т.д.)\n   - Место тренировки (дом или зал)\n   - Снаряжение (коврик, гантели, резина, тренажёры, свободные веса)\n   - Настроение сегодня (😊🔥😫😔)\n   - Сколько минут есть\n   - Цель (размяться / подвижность / сила / энергия / похудеть / подготовка к событию)\n\n2. Только после получения ВСЕХ ответов предложи 2-3 простых упражнения с учётом пола, возраста, болей, места, снаряжения, настроения, времени и цели.\n\n3. Если пользователь выбирал цель «подготовка к событию» (лыжи, марафон, восхождение) или «реабилитация» (после травмы, операции) — учитывай это в упражнениях.\n\n4. Запрещено: давать длинные списки, тайминги, подходы, повторения. Только 2-3 упражнения коротко.\n\n5. Запрещена токсичная мотивация. Не стыдить, не давить, не сравнивать. Вместо «ты должен» — «ты можешь», «давай попробуем».\n\n6. Если пользователь ленится или пропустил тренировку — не ругать. Сказать: «Это нормально. Давай 5 минут лёгкой разминки?»\n\n7. Если пользователь спрашивает про еду — дать общие советы, но добавить: «Я не диетолог, при серьезных вопросах к врачу».\n\n8. Если пользователь жалуется на боль или сильный стресс — посоветовать обратиться к специалисту и не давать упражнений.\n\n9. Всегда добавляй в конце напоминание: «Слушай тело. При острой боли — остановись».\n\n10. Отвечай коротко, тепло, с эмодзи. Будь как друг, который разбирается в спорте.'
+                        },
                         ...this.chatHistory.slice(-10).map(msg => ({
                             role: 'user',
                             content: msg.user
@@ -187,7 +139,6 @@ class DeepSeekVKApp {
             this.sendButton.disabled = false;
         }
     }
-       
 
     addMessage(text, sender) {
         const messageDiv = document.createElement('div');
@@ -247,8 +198,9 @@ class DeepSeekVKApp {
                 <div class="welcome-message">
                     <div class="welcome-avatar">🤖</div>
                     <div class="welcome-text">
-                        <h3>Привет! Я DeepSeek AI</h3>
-                        <p>Задавайте вопросы, и я постараюсь помочь вам наилучшим образом.</p>
+                        <h3>Привет! Я D&R Fit</h3>
+                        <p>Твой ИИ-напарник для тренировок, восстановления и поддержки. Без токсичной мотивации.</p>
+                        <p>👇 Напиши «Дай тренировку» или задай вопрос</p>
                     </div>
                 </div>
             `;
@@ -274,7 +226,7 @@ class DeepSeekVKApp {
     }
 
     showAbout() {
-        alert('DeepSeek AI Assistant\nВерсия 1.0\n\nAI-помощник для ВКонтакте на базе DeepSeek AI');
+        alert('D&R Fit | ИИ-напарник\nВерсия 1.0\n\nИИ-помощник для ВКонтакте на базе DeepSeek AI');
     }
 
     saveToHistory(userMessage, botMessage) {
@@ -284,7 +236,6 @@ class DeepSeekVKApp {
             timestamp: new Date().toISOString()
         });
         
-        // Ограничиваем историю
         if (this.chatHistory.length > 50) {
             this.chatHistory = this.chatHistory.slice(-50);
         }
@@ -301,10 +252,10 @@ class DeepSeekVKApp {
         if (saved) {
             this.chatHistory = JSON.parse(saved);
             
-            // Восстанавливаем последние сообщения
             const recentMessages = this.chatHistory.slice(-10);
             if (recentMessages.length > 0) {
-                document.querySelector('.welcome-message').style.display = 'none';
+                const welcome = document.querySelector('.welcome-message');
+                if (welcome) welcome.style.display = 'none';
                 recentMessages.forEach(chat => {
                     this.addMessage(chat.user, 'user');
                     this.addMessage(chat.bot, 'bot');
@@ -314,7 +265,6 @@ class DeepSeekVKApp {
     }
 }
 
-// Инициализация приложения
 document.addEventListener('DOMContentLoaded', () => {
     window.deepSeekApp = new DeepSeekVKApp();
 });
