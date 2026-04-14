@@ -1,0 +1,180 @@
+.desktop-header {
+    display: none;
+}
+
+.mobile-header {
+    display: block;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mobile-title h1 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.mobile-title .status {
+    font-size: 10px;
+    color: #28a745;
+}
+
+.menu-btn, .new-chat-btn {
+    padding: 8px 12px;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.chat-container {
+    padding: 10px 15px;
+    padding-bottom: 80px;
+}
+
+.message {
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+    max-width: 85%;
+}
+
+.input-container {
+    flex-direction: column;
+}
+
+#user-input {
+    min-height: 60px;
+}
+
+.features {
+    flex-wrap: wrap;
+}
+
+.feature-btn {
+    flex: 1;
+    min-width: 80px;
+}
+
+.quick-actions {
+    flex-direction: column;
+    align-items: center;
+}
+
+.quick-btn {
+    width: 100%;
+    max-width: 200px;
+}
+
+/* Мобильное меню */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 85%;
+    height: 100%;
+    background: white;
+    transition: left 0.3s ease;
+    z-index: 1000;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu.active {
+    left: 0;
+}
+
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.menu-header h3 {
+    color: #333;
+}
+
+.menu-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.menu-content {
+    padding: 20px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: none;
+    background: #f8f9fa;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.3s;
+    gap: 10px;
+}
+
+.menu-item:hover {
+    background: #007bff;
+    color: white;
+}
+
+.menu-icon {
+    font-size: 18px;
+}
+
+/* Нижняя навигация */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
+    font-size: 10px;
+    color: #666;
+    cursor: pointer;
+    padding: 5px;
+    flex: 1;
+}
+
+.nav-item.active {
+    color: #007bff;
+}
+
+.nav-icon {
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+
+.nav-text {
+    font-size: 10px;
+}

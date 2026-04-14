@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&R Fit — ИИ-напарник</title>
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/vk.css">
+</head>
+<body>
+    <div id="vk-app">
+        <div class="vk-header">
+            <div class="vk-header-content">
+                <div class="app-info">
+                    <div class="app-icon">🤖</div>
+                    <div class="app-text">
+                        <h1>D&R Fit | ИИ-напарник</h1>
+                        <span class="app-status">Готов помочь</span>
+                    </div>
+                </div>
+                <button class="vk-menu-btn" id="vk-menu">⋯</button>
+            </div>
+        </div>
+
+        <div class="vk-chat-container">
+            <div class="chat-messages" id="messages">
+                <div class="welcome-message">
+                    <div class="welcome-avatar">🤖</div>
+                    <div class="welcome-text">
+                        <h3>Привет! Я D&R Fit</h3>
+                        <p>Твой ИИ-напарник для тренировок, восстановления и поддержки. Без токсичной мотивации.</p>
+                        <p>👇 Напиши «Дай тренировку» или задай вопрос</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vk-input-area">
+                <div class="input-wrapper">
+                    <textarea 
+                        id="user-input" 
+                        placeholder="Напишите сообщение..."
+                        rows="1"
+                        maxlength="2000"
+                    ></textarea>
+                    <button id="send-button" class="vk-send-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="vk-menu" id="vk-menu-panel">
+            <div class="menu-content">
+                <button class="menu-item" data-action="new-chat">
+                    <span class="icon">🆕</span>
+                    Новый чат
+                </button>
+                <button class="menu-item" data-action="history">
+                    <span class="icon">📚</span>
+                    История
+                </button>
+                <button class="menu-item" data-action="share">
+                    <span class="icon">↗️</span>
+                    Поделиться
+                </button>
+                <button class="menu-item" data-action="about">
+                    <span class="icon">ℹ️</span>
+                    О приложении
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

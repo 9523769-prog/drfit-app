@@ -1,0 +1,15 @@
+├── api/
+├── styles/
+│   ├── common.css
+│   ├── desktop.css
+│   └── mobile.css
+├── js/
+│   ├── app.js
+│   ├── deepseek-api.js
+│   └── vk-bridge.js
+├── index.html
+├── server.js
+├── package.json
+├── vercel.json
+├── .env
+└── README.md
